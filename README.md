@@ -42,3 +42,9 @@ options:
     * ListingFinder code will be minimal
   
 -> will do option 2
+
+problems faced:
+
+* generally how to call static functions from other classes
+* had to learn about `call_user_func` and `forward_static_call`
+* and how to reference the function (needs namespace+class+function) 
