@@ -4,6 +4,7 @@ namespace Uniplaces\STest;
 use Uniplaces\STest\Listing\Listing;
 use Uniplaces\STest\Requirement\StayTime;
 use Uniplaces\STest\Requirement\TenantTypes;
+use DateTime;
 
 abstract class ListingMatchers
 {
