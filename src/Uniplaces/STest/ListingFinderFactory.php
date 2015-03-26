@@ -12,7 +12,8 @@ abstract class ListingFinderFactory
      */
     public static function createSimple()
     {
-        return new ListingFinder('simple');
+        $matchFunctions = ListingFinderFactory::simpleMatchers();
+        return new ListingFinder($matchFunctions);
     }
 
     /**
@@ -20,6 +21,33 @@ abstract class ListingFinderFactory
      */
     public static function createAdvanced()
     {
-        return new ListingFinder('advanced');
+        $matchFunctions = ListingFinderFactory::advancedMatchers();
+        return new ListingFinder($matchFunctions);
+    }
+
+    /**
+     * @return array of matchers
+     */
+    private static function simpleMatchers()
+    {
+        return [
+            __NAMESPACE__ .'\ListingMatchers::matchCity',
+            __NAMESPACE__ .'\ListingMatchers::matchStayTime',
+            __NAMESPACE__ .'\ListingMatchers::matchTenantType'
+        ];
+    }
+
+    /**
+     * @return array of matchers
+     */
+    private static function advancedMatchers()
+    {
+        $matchers = ListingFinderFactory::simpleMatchers();
+        $advancedMatchers = [
+            __NAMESPACE__ .'\ListingMatchers::matchAddress',
+            __NAMESPACE__ .'\ListingMatchers::matchPrice'
+        ];
+        $matchers = array_merge($matchers, $advancedMatchers);
+        return $matchers;
     }
 }
