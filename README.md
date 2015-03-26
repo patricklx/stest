@@ -25,3 +25,20 @@ After refactor is expected:
 * curl -sS https://getcomposer.org/installer | php
 * php composer.phar install --dev
 * Run tests: ./vendor/bin/phpunit
+
+
+## My procedure
+Some things that come to mind
+
+* extract some logic form ListingFinder and put it in ListingFinderFactory
+
+options:
+
+1. create some sort of search API in ListingFinder
+    * define some methods like "equal, max, min" ...
+    * less flexible but would define some conventions for search
+2. or pass matcher functions to the ListingFinder constructor  
+    * more flexible, easy to add new rules, no hard coded values, easy to add new types of search
+    * ListingFinder code will be minimal
+  
+-> will do option 2
