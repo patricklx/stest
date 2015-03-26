@@ -13,10 +13,16 @@ class ListingFinder implements ListingFinderInterface
     protected $matchFunctions;
 
     /**
+     * @var array configs for matchers
+     */
+    protected $config;
+
+    /**
      * @param $matchFunctions array of function($listing, $functions)
      */
-    public function __construct($matchFunctions)
+    public function __construct($config, $matchFunctions)
     {
+        $this->config = $config;
         $this->matchFunctions = $matchFunctions;
     }
 
@@ -35,7 +41,7 @@ class ListingFinder implements ListingFinderInterface
             $matches = false;
             foreach ($this->matchFunctions as $matchFn) {
 
-                $matches = call_user_func($matchFn, $listing, $search);
+                $matches = call_user_func($matchFn, $listing, $search, $this->config);
                 if (!$matches) {
                     break;
                 }

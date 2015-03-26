@@ -8,6 +8,15 @@ use Uniplaces\STest\Requirement\TenantTypes;
 abstract class ListingMatchers
 {
     /**
+     * @return array  default configuration for matcher methods
+     */
+    public static function defaultConfig()
+    {
+        return array(
+          'address_levenstein' => 5
+        );
+    }
+    /**
      * @param Listing $listing
      * @param $search
      * @return bool
@@ -56,15 +65,16 @@ abstract class ListingMatchers
     /**
      * @param Listing $listing
      * @param $search
+     * @param $config
      * @return bool
      */
-    public static function matchAddress(Listing $listing, $search)
+    public static function matchAddress(Listing $listing, $search, $config)
     {
         if (isset($search['address'])) {
             $listingAddress = strtolower(trim($listing->getLocalization()->getAddress()));
             $address = strtolower(trim($search['address']));
 
-            if (levenshtein($listingAddress, $address) > 5) {
+            if (levenshtein($listingAddress, $address) > $config['address_levenstein']) {
                 return false;
             }
         }

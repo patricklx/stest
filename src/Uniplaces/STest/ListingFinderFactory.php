@@ -13,7 +13,8 @@ abstract class ListingFinderFactory
     public static function createSimple()
     {
         $matchFunctions = ListingFinderFactory::simpleMatchers();
-        return new ListingFinder($matchFunctions);
+        $config = ListingMatchers::defaultConfig();
+        return new ListingFinder($config, $matchFunctions);
     }
 
     /**
@@ -22,7 +23,8 @@ abstract class ListingFinderFactory
     public static function createAdvanced()
     {
         $matchFunctions = ListingFinderFactory::advancedMatchers();
-        return new ListingFinder($matchFunctions);
+        $config = ListingMatchers::defaultConfig();
+        return new ListingFinder($config, $matchFunctions);
     }
 
     /**
