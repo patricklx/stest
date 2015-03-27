@@ -18,7 +18,8 @@ class ListingFinder implements ListingFinderInterface
     protected $config;
 
     /**
-     * @param $matchFunctions array of function($listing, $functions)
+     * @param $config
+     * @param $matchFunctions array of function($listing, $search, $config (optional))
      */
     public function __construct($config, $matchFunctions)
     {
@@ -30,6 +31,7 @@ class ListingFinder implements ListingFinderInterface
      * @param Listing[] $listings
      * @param array     $search
      *
+     * an listing is included if all matchfunctions return true
      * @return Listing[]
      */
     public function reduce(array $listings, array $search)

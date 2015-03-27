@@ -44,12 +44,12 @@ abstract class ListingFinderFactory
      */
     private static function advancedMatchers()
     {
-        $matchers = ListingFinderFactory::simpleMatchers();
+        $simpleMatchers = ListingFinderFactory::simpleMatchers();
         $advancedMatchers = [
             __NAMESPACE__ .'\ListingMatchers::matchAddress',
             __NAMESPACE__ .'\ListingMatchers::matchPrice'
         ];
-        $matchers = array_merge($matchers, $advancedMatchers);
+        $matchers = array_merge($simpleMatchers, $advancedMatchers);
         return $matchers;
     }
 }
