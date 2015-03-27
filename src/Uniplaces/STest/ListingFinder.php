@@ -10,7 +10,7 @@ class ListingFinder implements ListingFinderInterface
     /**
      * @var array of functions
      */
-    protected $matchFunctions;
+    protected $matcherNames;
 
     /**
      * @var array configs for matchers
@@ -19,12 +19,12 @@ class ListingFinder implements ListingFinderInterface
 
     /**
      * @param $config
-     * @param $matchFunctions array of function($listing, $search, $config (optional))
+     * @param $matcherNames array of function($listing, $search, $config (optional))
      */
-    public function __construct($config, $matchFunctions)
+    public function __construct($config, $matcherNames)
     {
         $this->config = $config;
-        $this->matchFunctions = $matchFunctions;
+        $this->matcherNames = $matcherNames;
     }
 
     /**
@@ -41,9 +41,9 @@ class ListingFinder implements ListingFinderInterface
         foreach ($listings as $listing) {
 
             $matches = false;
-            foreach ($this->matchFunctions as $matcherNamer) {
+            foreach ($this->matcherNames as $matcherName) {
 
-                $matches = ListingMatchers::callMatcher($matcherNamer, $listing, $search, $this->config);
+                $matches = ListingMatchers::callMatcher($matcherName, $listing, $search, $this->config);
                 if (!$matches) {
                     break;
                 }
