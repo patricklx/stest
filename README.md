@@ -43,8 +43,12 @@ options:
   
 -> will do option 2
 
-problems faced:
+some notes:
 
-* generally how to call static functions from other classes
+* learned how to dynamically call static functions from other classes
 * had to learn about `call_user_func` and `forward_static_call`
-* and how to reference the function (needs namespace+class+function) 
+* and how to reference the function (needs namespace+class+function)
+* finally decided to use ::$functionName
+* usage of constants, to allow internal changes, easy name refactoring and better ide autocomplete
+* since the constants are strings, it can be easily extended to subdivided the ListingMatchers into more files 
+ for different ListingMatcher groups
