@@ -32,11 +32,10 @@ abstract class ListingFinderFactory
      */
     private static function simpleMatchers()
     {
-        $prefix = __NAMESPACE__ .'\ListingMatchers::';
         return [
-            $prefix.'matchCity',
-            $prefix.'matchStayTime',
-            $prefix.'matchTenantType'
+            ListingMatchers::MATCH_CITY,
+            ListingMatchers::MATCH_STAYTIME,
+            ListingMatchers::MATCH_TENANTTYPE
         ];
     }
 
@@ -45,13 +44,12 @@ abstract class ListingFinderFactory
      */
     private static function advancedMatchers()
     {
-        $prefix = __NAMESPACE__ .'\ListingMatchers::';
-        $matchers = ListingFinderFactory::simpleMatchers();
+        $simpleMatchers = ListingFinderFactory::simpleMatchers();
         $advancedMatchers = [
-            $prefix.'matchAddress',
-            $prefix.'matchPrice'
+            ListingMatchers::MATCH_ADDRESS,
+            ListingMatchers::MATCH_PRICE
         ];
-        $matchers = array_merge($matchers, $advancedMatchers);
+        $matchers = array_merge($simpleMatchers, $advancedMatchers);
         return $matchers;
     }
 }

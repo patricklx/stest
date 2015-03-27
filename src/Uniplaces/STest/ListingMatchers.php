@@ -6,8 +6,18 @@ use Uniplaces\STest\Requirement\StayTime;
 use Uniplaces\STest\Requirement\TenantTypes;
 use DateTime;
 
-abstract class ListingMatchers
+class ListingMatchers
 {
+    const MATCH_CITY       = 'matchCity';
+    const MATCH_STAYTIME   = 'matchStayTime';
+    const MATCH_TENANTTYPE = 'matchTenantType';
+    const MATCH_ADDRESS    = 'matchAddress';
+    const MATCH_PRICE      = 'matchPrice';
+
+    public static function callMatcher($name, Listing $listing, $search, $config)
+    {
+        return ListingMatchers::$name($listing, $search, $config);
+    }
     /**
      * @return array  default configuration for matcher methods
      */
@@ -22,7 +32,7 @@ abstract class ListingMatchers
      * @param $search
      * @return bool
      */
-    public static function matchCity(Listing $listing, $search)
+    private static function matchCity(Listing $listing, $search)
     {
         return $listing->getLocalization()->getCity() == $search['city'];
     }
@@ -32,7 +42,7 @@ abstract class ListingMatchers
      * @param $search
      * @return bool
      */
-    public static function matchStayTime(Listing $listing, $search)
+    private static function matchStayTime(Listing $listing, $search)
     {
         $stayTime = $listing->getRequirements()->getStayTime();
         if (isset($search['start_date']) && $stayTime instanceof StayTime) {
@@ -54,7 +64,7 @@ abstract class ListingMatchers
      * @param $search
      * @return bool
      */
-    public static function matchTenantType(Listing $listing, $search)
+    private static function matchTenantType(Listing $listing, $search)
     {
         $tenantTypes = $listing->getRequirements()->getTenantTypes();
         if ($tenantTypes instanceof TenantTypes && !in_array($search['occupation'], $tenantTypes->toArray())) {
@@ -69,7 +79,7 @@ abstract class ListingMatchers
      * @param $config
      * @return bool
      */
-    public static function matchAddress(Listing $listing, $search, $config)
+    private static function matchAddress(Listing $listing, $search, $config)
     {
         if (isset($search['address'])) {
             $listingAddress = strtolower(trim($listing->getLocalization()->getAddress()));
@@ -87,7 +97,7 @@ abstract class ListingMatchers
      * @param $search
      * @return bool
      */
-    public static function matchPrice(Listing $listing, $search)
+    private static function matchPrice(Listing $listing, $search)
     {
         if (isset($search['price'])) {
             $listingPrice = $listing->getPrice();
