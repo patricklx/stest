@@ -8,13 +8,13 @@ use Uniplaces\STest\Listing\Listing;
 class ListingFinder implements ListingFinderInterface
 {
     /**
-     * @var array of matcher classes
+     * @var array of MatcherInterface
      */
     protected $matchers;
 
     /**
      * @param $config
-     * @param $matcherNames array of function($listing, $search, $config (optional))
+     * @param $matchers of MatcherInterface
      */
     public function __construct($matchers)
     {
@@ -25,7 +25,6 @@ class ListingFinder implements ListingFinderInterface
      * @param Listing[] $listings
      * @param array     $search
      *
-     * an listing is included if all matchfunctions return true
      * @return Listing[]
      */
     public function reduce(array $listings, array $search)
@@ -36,8 +35,10 @@ class ListingFinder implements ListingFinderInterface
 
             $matches = false;
             foreach ($this->matchers as $matcher) {
-
-                $matches = $matcher->isMatch($listing, $search);
+                if (!$matcher->canValidate($listing, $search)) {
+                    continue;
+                }
+                $matches = $matcher->isValid($listing, $search);
                 if (!$matches) {
                     break;
                 }

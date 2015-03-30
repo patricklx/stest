@@ -11,5 +11,12 @@ interface MatcherInterface {
      * @param $search
      * @return bool
      */
-    public function isMatch(Listing $listing, $search);
+    public function isValid(Listing $listing, $search);
+
+    /**
+     * @param Listing $listing
+     * @param $search
+     * @return bool
+     */
+    public function canValidate(Listing $listing, $search);
 }
