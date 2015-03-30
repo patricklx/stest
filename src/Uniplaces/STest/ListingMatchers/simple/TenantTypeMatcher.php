@@ -3,6 +3,7 @@
 namespace Uniplaces\STest\ListingMatchers\simple;
 use Uniplaces\STest\ListingMatchers\MatcherInterface;
 use Uniplaces\STest\Listing\Listing;
+use Uniplaces\STest\Requirement\TenantTypes;
 
 
 class TenantTypeMatcher implements MatcherInterface {
@@ -17,6 +18,6 @@ class TenantTypeMatcher implements MatcherInterface {
 
     public function canValidate(Listing $listing, $search){
         $tenantTypes = $listing->getRequirements()->getTenantTypes();
-        return isset($search['occupation']) && is_object($tenantTypes);
+        return isset($search['occupation']) && $tenantTypes instanceof TenantTypes;
     }
 }

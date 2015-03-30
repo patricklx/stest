@@ -40,7 +40,7 @@ options:
 2. or pass matcher functions to the ListingFinder constructor  
     * more flexible, easy to add new rules, no hard coded values, easy to add new types of search
     * ListingFinder code will be minimal
-  
+
 -> will do option 2
 
 some notes:
@@ -50,5 +50,6 @@ some notes:
 * and how to reference the function (needs namespace+class+function)
 * finally decided to use ::$functionName
 * usage of constants, to allow internal changes, easy name refactoring and better ide autocomplete
-* since the constants are strings, it can be easily extended to subdivided the ListingMatchers into more files 
+* since the constants are strings, it can be easily extended to subdivided the ListingMatchers into more files
  for different ListingMatcher groups
+* finally decided to use classes for matching 

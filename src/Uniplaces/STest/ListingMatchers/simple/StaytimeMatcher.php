@@ -3,7 +3,7 @@
 namespace Uniplaces\STest\ListingMatchers\simple;
 use Uniplaces\STest\ListingMatchers\MatcherInterface;
 use Uniplaces\STest\Listing\Listing;
-use Uniplaces\STest\Reqirement\StayTime;
+use Uniplaces\STest\Requirement\StayTime;
 
 
 class StaytimeMatcher implements MatcherInterface {
@@ -24,6 +24,6 @@ class StaytimeMatcher implements MatcherInterface {
 
     public function canValidate(Listing $listing, $search){
         $stayTime = $listing->getRequirements()->getStayTime();
-        return isset($search['start_date']) && is_object($stayTime);
+        return isset($search['start_date']) && $stayTime instanceof StayTime;
     }
 }
