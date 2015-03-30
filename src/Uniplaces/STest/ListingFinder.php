@@ -8,23 +8,17 @@ use Uniplaces\STest\Listing\Listing;
 class ListingFinder implements ListingFinderInterface
 {
     /**
-     * @var array of functions
+     * @var array of matcher classes
      */
-    protected $matcherNames;
-
-    /**
-     * @var array configs for matchers
-     */
-    protected $config;
+    protected $matchers;
 
     /**
      * @param $config
      * @param $matcherNames array of function($listing, $search, $config (optional))
      */
-    public function __construct($config, $matcherNames)
+    public function __construct($matchers)
     {
-        $this->config = $config;
-        $this->matcherNames = $matcherNames;
+        $this->matchers = $matchers;
     }
 
     /**
@@ -41,9 +35,9 @@ class ListingFinder implements ListingFinderInterface
         foreach ($listings as $listing) {
 
             $matches = false;
-            foreach ($this->matcherNames as $matcherName) {
+            foreach ($this->matchers as $matcher) {
 
-                $matches = ListingMatchers::callMatcher($matcherName, $listing, $search, $this->config);
+                $matches = $matcher->isMatch($listing, $search);
                 if (!$matches) {
                     break;
                 }

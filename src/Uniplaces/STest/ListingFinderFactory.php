@@ -2,6 +2,8 @@
 
 namespace Uniplaces\STest;
 
+use Uniplaces\STest\ListingMatchers\SimpleMatcher;
+use Uniplaces\STest\ListingMatchers\AdvancedMatcher;
 /**
  * ListingFinderFactory
  */
@@ -12,9 +14,8 @@ abstract class ListingFinderFactory
      */
     public static function createSimple()
     {
-        $matchFunctions = ListingFinderFactory::simpleMatchers();
-        $config = ListingMatchers::defaultConfig();
-        return new ListingFinder($config, $matchFunctions);
+        $matcherClasses = ListingFinderFactory::simpleMatchers();
+        return new ListingFinder($matcherClasses);
     }
 
     /**
@@ -22,9 +23,8 @@ abstract class ListingFinderFactory
      */
     public static function createAdvanced()
     {
-        $matchFunctions = ListingFinderFactory::advancedMatchers();
-        $config = ListingMatchers::defaultConfig();
-        return new ListingFinder($config, $matchFunctions);
+        $matcherClasses = ListingFinderFactory::advancedMatchers();
+        return new ListingFinder($matcherClasses);
     }
 
     /**
@@ -33,9 +33,7 @@ abstract class ListingFinderFactory
     private static function simpleMatchers()
     {
         return [
-            ListingMatchers::MATCH_CITY,
-            ListingMatchers::MATCH_STAYTIME,
-            ListingMatchers::MATCH_TENANTTYPE
+            new SimpleMatcher()
         ];
     }
 
@@ -44,12 +42,8 @@ abstract class ListingFinderFactory
      */
     private static function advancedMatchers()
     {
-        $simpleMatchers = ListingFinderFactory::simpleMatchers();
-        $advancedMatchers = [
-            ListingMatchers::MATCH_ADDRESS,
-            ListingMatchers::MATCH_PRICE
+        return [
+            new AdvancedMatcher()
         ];
-        $matchers = array_merge($simpleMatchers, $advancedMatchers);
-        return $matchers;
     }
 }
