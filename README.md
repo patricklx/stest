@@ -53,3 +53,10 @@ some notes:
 * since the constants are strings, it can be easily extended to subdivided the ListingMatchers into more files
  for different ListingMatcher groups
 * finally decided to use classes for matching 
+
+the class `MatcherInterface` defines to methods
+
+* `canValidate` checks if the search can be validated by checking required values
+* `isValid` checks if the search matches the matcher class requirements
+* the `ListingFinder` iterates through all matchers for each listing, if `canValidate` returns `false`
+the matcher is skipped.  If `isValid` returns `false` the iteration is stopped and the specific listing will not be added to the match list

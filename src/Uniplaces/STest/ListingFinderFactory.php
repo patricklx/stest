@@ -30,7 +30,7 @@ abstract class ListingFinderFactory
     }
 
     /**
-     * @return array of matchers
+     * @return array of MatcherInterface
      */
     private static function simpleMatchers()
     {
@@ -42,7 +42,7 @@ abstract class ListingFinderFactory
     }
 
     /**
-     * @return array of matchers
+     * @return array of MatcherInterface
      */
     private static function advancedMatchers()
     {

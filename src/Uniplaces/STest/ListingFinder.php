@@ -13,8 +13,7 @@ class ListingFinder implements ListingFinderInterface
     protected $matchers;
 
     /**
-     * @param $config
-     * @param $matchers of MatcherInterface
+     * @param array of MatcherInterface
      */
     public function __construct($matchers)
     {

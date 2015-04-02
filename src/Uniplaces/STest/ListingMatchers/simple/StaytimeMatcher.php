@@ -1,6 +1,7 @@
 <?php
 
 namespace Uniplaces\STest\ListingMatchers\simple;
+use DateTime;
 use Uniplaces\STest\ListingMatchers\MatcherInterface;
 use Uniplaces\STest\Listing\Listing;
 use Uniplaces\STest\Requirement\StayTime;
