@@ -3,17 +3,18 @@
 namespace Uniplaces\STest;
 
 use Uniplaces\STest\Listing\Listing;
+use Uniplaces\STest\ListingMatchers\MatcherInterface;
 
 
 class ListingFinder implements ListingFinderInterface
 {
     /**
-     * @var array of MatcherInterface
+     * @var MatcherInterface[]
      */
     protected $matchers;
 
     /**
-     * @param array of MatcherInterface
+     * @param $matchers MatcherInterface[]
      */
     public function __construct($matchers)
     {
