@@ -25,6 +25,8 @@ class StaytimeMatcher implements MatcherInterface {
 
     public function canValidate(Listing $listing, $search){
         $stayTime = $listing->getRequirements()->getStayTime();
-        return isset($search['start_date']) && $stayTime instanceof StayTime;
+        return isset($search['start_date'])
+                && isset($search['end_date'])
+                && $stayTime instanceof StayTime;
     }
 }
