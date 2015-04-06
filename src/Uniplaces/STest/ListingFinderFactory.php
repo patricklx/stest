@@ -2,8 +2,12 @@
 
 namespace Uniplaces\STest;
 
-use Uniplaces\STest\ListingMatchers\simple;
-use Uniplaces\STest\ListingMatchers\advanced;
+use Uniplaces\STest\ListingMatchers\advanced\AddressMatcher;
+use Uniplaces\STest\ListingMatchers\advanced\PriceMatcher;
+use Uniplaces\STest\ListingMatchers\MatcherInterface;
+use Uniplaces\STest\ListingMatchers\simple\CityMatcher;
+use Uniplaces\STest\ListingMatchers\simple\StaytimeMatcher;
+use Uniplaces\STest\ListingMatchers\simple\TenantTypeMatcher;
 
 
 /**
@@ -30,26 +34,26 @@ abstract class ListingFinderFactory
     }
 
     /**
-     * @return array of MatcherInterface
+     * @return MatcherInterface[]
      */
     private static function simpleMatchers()
     {
         return [
-            new simple\CityMatcher(),
-            new simple\StaytimeMatcher(),
-            new simple\TenantTypeMatcher()
+            new CityMatcher(),
+            new StaytimeMatcher(),
+            new TenantTypeMatcher()
         ];
     }
 
     /**
-     * @return array of MatcherInterface
+     * @return MatcherInterface[]
      */
     private static function advancedMatchers()
     {
         $simpleMatchers = ListingFinderFactory::simpleMatchers();
         $advancedMatchers = [
-            new advanced\AddressMatcher(),
-            new advanced\PriceMatcher()
+            new AddressMatcher(),
+            new PriceMatcher()
         ];
         return array_merge($simpleMatchers, $advancedMatchers);
     }
