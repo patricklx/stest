@@ -25,3 +25,39 @@ After refactor is expected:
 * curl -sS https://getcomposer.org/installer | php
 * php composer.phar install --dev
 * Run tests: ./vendor/bin/phpunit
+
+
+## My procedure
+Some things that come to mind
+
+* extract some logic form ListingFinder and put it in ListingFinderFactory
+
+options:
+
+1. create some sort of search API in ListingFinder
+    * define some methods like "equal, max, min" ...
+    * less flexible but would define some conventions for search
+2. or pass matcher functions to the ListingFinder constructor  
+    * more flexible, easy to add new rules, no hard coded values, easy to add new types of search
+    * ListingFinder code will be minimal
+
+-> will do option 2
+
+some notes:
+
+* learned how to dynamically call static functions from other classes
+* had to learn about `call_user_func` and `forward_static_call`
+* and how to reference the function (needs namespace+class+function)
+* finally decided to use ::$functionName
+* usage of constants, to allow internal changes, easy name refactoring and better ide autocomplete
+* since the constants are strings, it can be easily extended to subdivided the ListingMatchers into more files
+ for different ListingMatcher groups
+* finally decided to use classes for matching 
+
+the class `MatcherInterface` defines to methods
+
+* `canValidate` checks if the search can be validated by checking required values
+* `isValid` checks if the search matches the matcher class requirements
+
+the `ListingFinder` iterates through all matchers for each listing, if `canValidate` returns `false`
+the matcher is skipped.  If `isValid` returns `false` the iteration is stopped and the specific listing will not be added to the match list
