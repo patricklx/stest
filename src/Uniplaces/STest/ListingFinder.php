@@ -25,6 +25,8 @@ class ListingFinder implements ListingFinderInterface
      * @param Listing[] $listings
      * @param array     $search
      *
+     * applies all matchers to each listing, if all are valid or at least one and the rest is skipped the listing
+     * will be included in the result
      * @return Listing[]
      */
     public function reduce(array $listings, array $search)
