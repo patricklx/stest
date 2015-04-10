@@ -2,12 +2,12 @@
 
 namespace Uniplaces\STest;
 
-use Uniplaces\STest\ListingMatchers\advanced\AddressMatcher;
-use Uniplaces\STest\ListingMatchers\advanced\PriceMatcher;
+use Uniplaces\STest\ListingMatchers\AddressMatcher;
+use Uniplaces\STest\ListingMatchers\PriceMatcher;
 use Uniplaces\STest\ListingMatchers\MatcherInterface;
-use Uniplaces\STest\ListingMatchers\simple\CityMatcher;
-use Uniplaces\STest\ListingMatchers\simple\StaytimeMatcher;
-use Uniplaces\STest\ListingMatchers\simple\TenantTypeMatcher;
+use Uniplaces\STest\ListingMatchers\CityMatcher;
+use Uniplaces\STest\ListingMatchers\StaytimeMatcher;
+use Uniplaces\STest\ListingMatchers\TenantTypeMatcher;
 
 
 /**
